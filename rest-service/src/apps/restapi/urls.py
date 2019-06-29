@@ -38,11 +38,11 @@ urlpatterns = [
 
     # labels
     # get
-    path('labels/<int:sp_lbl_id>/list', views.LabelView.as_view(), name='superclasses_list'),
+    path('labels/list', views.LabelView.as_view(), name='superclasses_list'),
     # post
-    path('labels/<int:sp_lbl_id>/create', views.LabelView.as_view(), name='superclasses_list'),
+    path('labels/create', views.LabelView.as_view(), name='superclasses_list'),
     # get, put, delete
-    path('labels/<int:sp_lbl_id>/<int:lbl_id>', views.LabelView.as_view(), name='superclasses_detail'),
+    path('labels/<int:lbl_id>', views.LabelView.as_view(), name='superclasses_detail'),
 
     # колличество людей в камере
     path('camera/<int:cam_id>/workers/number/curent/', views.WorkerCountView.as_view(), name='last_event'),
