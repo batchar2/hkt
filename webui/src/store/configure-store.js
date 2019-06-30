@@ -11,6 +11,7 @@ import productListReducer from './reducers/product-list.reducer';
 import rightMenuReducer from './reducers/right-menu.reducer';
 import objectDetailReducer from './reducers/object-detail.reducer';
 import cameraDetailReducer from './reducers/camera-detail.reducer';
+import workersReducer from './reducers/workers.reducer';
 
 export default function configureStore(router, initialState = {}) {
     const reducers = combineReducers({
@@ -21,6 +22,7 @@ export default function configureStore(router, initialState = {}) {
         objects: rightMenuReducer,
         object: objectDetailReducer,
         camera: cameraDetailReducer,
+        workers: workersReducer,
         /* system */
         router: router5Reducer,     // редюсер на роутер
     });

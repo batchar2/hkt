@@ -9,8 +9,9 @@ import ImageUploader from 'react-images-upload';
 import { ROUTES } from '../../constants/router.consts';
 import objectDetailActions from '../../store/actions/object-detail.actions.js';
 import NotFoundPicture from './notfound.png';
-import CameraList from '../../components/CameraList'
-import ObjectActions from '../../components/ObjectActions'
+import CameraList from '../../components/CameraList';
+import ObjectActions from '../../components/ObjectActions';
+
 
 class ObjectDetail extends React.Component {
 
@@ -93,6 +94,7 @@ class ObjectDetail extends React.Component {
               <div className="content-wrapper">
                   <div className="title-wrapper">
                       <h2>{this.props.object.name}</h2>
+
                       <ObjectActions id={this.props.params.id}/>
                   </div>
                   <ImageMapper

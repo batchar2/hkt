@@ -5,7 +5,8 @@ import { actions as routerActions, createRouteNodeSelector } from 'redux-router5
 import { ROUTES } from '../../constants/router.consts';
 import cameraDetailActions from '../../store/actions/camera-detail.actions.js';
 import NotFoundPicture from './notfound.png';
-import CameraActions from '../../components/CameraActions'
+import CameraActions from '../../components/CameraActions';
+import Workers from '../../components/Workers';
 
 class CameraDetail extends React.Component {
 
@@ -24,8 +25,11 @@ class CameraDetail extends React.Component {
                       <h2>{this.props.camera.name}</h2>
                       <CameraActions id={this.props.params.id}/>
                   </div>
+
+
                   <img src={img}/>
            </div>
+           <Workers cameraId={this.props.params.id}/>
         </div>
         );
     }

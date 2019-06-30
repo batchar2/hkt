@@ -14,5 +14,10 @@ export const ROUTES = {
     CAMERA_EDIT: 'camera-edit',
     CAMERA_DELETE: 'camera-delete',
 
+    REPORT: 'report',
+    REPORT_VIEW: 'report-view',
+
+    GET_WORKERS: 'get-workers',
+
     USER_LIST:   'users',
 };

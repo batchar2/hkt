@@ -15,6 +15,7 @@ import ObjectAdd from '../pages/ObjectAdd';
 import ObjectEdit from '../pages/ObjectEdit';
 import CameraAdd from '../pages/CameraAdd';
 import CameraEdit from '../pages/CameraEdit';
+import Report from '../pages/Report';
 
 import { ROUTES } from '../constants/router.consts';
 
@@ -52,6 +53,9 @@ function SwitchPages({ route, onParams }) {
         } else if (testRoute(ROUTES.CAMERA_EDIT)) {
             console.error('+++++++');
             return (<CameraEdit params={params}/>);
+        } else if (testRoute(ROUTES.REPORT)) {
+            console.error('+++++++');
+            return (<Report params={params}/>);
         }
     }
     // onParams({

@@ -13,5 +13,10 @@ const routesPath = [
     { name: ROUTES.CAMERA_ADD,       path: '/camera/add' },
     { name: ROUTES.CAMERA_EDIT,      path: '/camera/edit/:id' },
 
+    { name: ROUTES.REPORT,           path: '/report' },
+    { name: ROUTES.REPORT_VIEW,      path: '/camera/:id/report/:year/:month/:day' },
+
+    { name: ROUTES.GET_WORKERS,      path: '/camera/:id/workers/number/curent/'}
+
 ];
 export default routesPath;
