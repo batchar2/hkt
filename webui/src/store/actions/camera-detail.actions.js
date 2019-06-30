@@ -7,15 +7,26 @@ export const loadCameraDetail = (cameraId) => {
     return dispatch => {
         // вызываю API
         // потом делаю вызов, залоген или нет пользователь
-        dispatch({
-            type: constants.GET_CAMERA_DETAIL,
-            payload: {
-              id: 1,
-              name: "camera 1",
-              screenshot: "/media/restapi/1.png",
-              position_coords: "qweqweqwe",
-            }
-        });
+
+
+        axios.get(`${axios.defaults.baseURL}/api/object/1/camera/${cameraId}`)
+            .then(res => {
+                dispatch({
+                    type: constants.GET_CAMERA_DETAIL,
+                    payload: res.data,
+                });
+            });
+
+
+        // dispatch({
+        //     type: constants.GET_CAMERA_DETAIL,
+        //     payload: {
+        //       id: 1,
+        //       name: "camera 1",
+        //       screenshot: "/media/restapi/1.png",
+        //       position_coords: "qweqweqwe",
+        //     }
+        // });
     }
 };
 

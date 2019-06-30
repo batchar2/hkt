@@ -11,9 +11,9 @@ class CameraList extends React.Component {
 
     render() {
         let cameras = null;
-        if (this.props.cameras && this.props.cameras.length) {
-            cameras = this.props.cameras.map(camera => {
-              return (<Camera data={camera} key={camera.id}/>)
+        if (this.props.obj && this.props.obj.cameras && this.props.obj.cameras.length) {
+            cameras = this.props.obj.cameras.map(camera => {
+              return (<Camera camera={camera} obj={this.props.obj} key={camera.id} />)
             });
         }
         return (

@@ -66,7 +66,7 @@ class ObjectDetail extends React.Component {
             areas: []//this.props.object.
         };
         if (this.props.object &&  this.props.object.cameras) {
-            console.error("RENDER 2>", this.props.object);
+
             for (let i = 0; i < this.props.object.cameras.length; i++) {
                 let coords = JSON.parse(this.props.object.cameras[i].position_coords);
                 let camid = this.props.object.cameras[i].id;
@@ -124,7 +124,7 @@ class ObjectDetail extends React.Component {
                         </div>
                     </div>
               </div>
-              <CameraList cameras={this.props.object.cameras}/>
+              <CameraList obj={this.props.object}/>
           </div>
         );
     }

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # my system
     'rest_framework',
+    'corsheaders',
 
     # customs
     'restapi',
@@ -54,6 +55,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.BrokenLinkEmailsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'src.urls'
@@ -120,12 +125,13 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
 
+USE_ETAGS = True
+CORS_ORIGIN_ALLOW_ALL = True
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 

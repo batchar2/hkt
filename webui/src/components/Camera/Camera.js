@@ -8,8 +8,8 @@ import { ROUTES } from '../../constants/router.consts';
 class Camera extends React.Component {
 
     render() {
-        let name = this.props.data.name;
-        let id = this.props.data.id;
+        let name = this.props.camera.name;
+        let id = this.props.camera.id;
         return (<div className="item"><Link router={this.props.router}
                      routeName={ROUTES.CAMERA_DETAIL}
                      routeParams={{id}}>
