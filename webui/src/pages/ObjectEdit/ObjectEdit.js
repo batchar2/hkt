@@ -28,7 +28,7 @@ class ObjectEdit extends React.Component {
     }
 
     render() {
-        let img = NotFoundPicture;
+        let img = null;
         let name = '';
         let picture = undefined;
          if (this.props.object) {

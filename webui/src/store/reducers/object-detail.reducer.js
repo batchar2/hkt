@@ -1,6 +1,6 @@
 import constants from '../../constants/object-detail.consts.js';
 
-const initialState = [];
+const initialState = {};
 
 const objectDetailReducer = (state = initialState, action) => {
     switch(action.type) {

@@ -16,13 +16,17 @@ class CameraList extends React.Component {
               return (<Camera data={camera} key={camera.id}/>)
             });
         }
-        return (<div className="menu-wrapper">
-            <h5>Камеры</h5>
-            <div className="submenu-wrapper">
-                {cameras}
-                <div class="item btn"><Link routeName={ROUTES.CAMERA_ADD}>+ Добавить камеру</Link></div>
+        return (
+            <div className="menu-wrapper">
+                <h5>Камеры</h5>
+                <div className="submenu-wrapper">
+                    {cameras}
+                    <div class="item btn">
+                        <Link routeName={ROUTES.CAMERA_ADD}>+ Добавить камеру</Link>
+                    </div>
+                </div>
             </div>
-        </div>);
+        );
 
     }
 }

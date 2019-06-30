@@ -13,25 +13,11 @@ import {SwitchPages, SwitchAuth} from './router';
 
 import AuthPage from './pages/AuthPage';
 import './App.css';
+
+
+import Z1 from './z1.jpg';
 //<SwitchAuth/>
 class App extends React.Component {
-
-    // constructor(props) {
-    //     super(props);
-    //
-    //     this.state = {
-    //         page: {
-    //             isCreatePage: false,
-    //             isSeparatePage: false,
-    //         }
-    //     }
-    //
-    // }
-
-    // onParams(p) {
-    //     //this.setState({page:p});
-    //     console.log('<<<<< ', p);
-    // }
 
     render() {
         // if (!USER.isAuthUser(this.props.user)) {
@@ -45,41 +31,28 @@ class App extends React.Component {
             <SwitchPages/>// onParams={(p) => this.onParams()}/>
         );
 
-        // if (this.state.page.isCreatePage) {
-        //
-        // }
-        //console.log('!!!!!!!!!!!!!!',this.state.page);
-        // if (this.state.isCreatePage) {
-        //
-        // }
-        //console.error('>>>>> separate = ????', page, page.props.separate.isSeparate);
-
-        //if (page.props.separate.isSeparate) {
-            // return (
-            //     {page}
-            // );
-        //}
         return (
 
             <div className="wrapper">
                 <header className="header">
                     <div className="logo-w">
-                      <img src="./logo.png" alt=""/>
+                      <img src={Z1} alt=""/>
                     </div>
                     <div class="user">
                         <div className="name btn-list">
-                            <div className="title">Стаська Пушистая</div>
+                            <div className="title">Пупкин В.</div>
                             <div className="list">
-                                <div><a href="#">Действие 1</a></div>
-                                <div><a href="#">Действие 1</a></div>
-                                <div><a href="#">Действие 1</a></div>
-
+                                <div><a href="#">Профиль</a></div>
+                                <div><a href="#">Выход</a></div>
                             </div>
                         </div>
                     </div>
                 </header>
                 <RightMenu/>
                 {page}
+                <footer class="footer">
+                    <p>@ Просто текст</p>
+                </footer>
             </div>
         );
     }

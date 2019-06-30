@@ -5,73 +5,58 @@ import constants from '../../constants/object-detail.consts.js';
 
 export const loadObjectDetail = (objectId) => {
     return dispatch => {
-        // вызываю API
-        // потом делаю вызов, залоген или нет пользователь
-        dispatch({
-            type: constants.GET_OBJECT_DETAIL,
-            payload: {
-                id: 1,
-                name: "object1",
-                picture: "./map.jpg",
-                cameras: [{
-                    id: 1,
-                    name: "camera 1",
-                    screenshot: "/media/restapi/1.png",
-                    position_coords: "qweqweqwe",
-                    isHovered: false,
-                },
-                {
-                    id: 2,
-                    name: "camera 2",
-                    screenshot: "/media/restapi/1.png",
-                    position_coords: "qweqweqwe",
-                    isHovered: false,
-                },
-                {
-                    id: 3,
-                    name: "camera 3",
-                    screenshot: "/media/restapi/1.png",
-                    position_coords: "qweqweqwe",
-                    isHovered: false,
-                },
-              ]
-            }
-        });
+        axios.get(`${axios.defaults.baseURL}/api/object/${objectId}`)
+            .then(res => {
+                console.error('loadObjectDetail >>>', res.data);
+                dispatch({
+                    type: constants.GET_OBJECT_DETAIL,
+                    payload: res.data,
+                });
+            });
     }
 };
 
-export const hoverChanged = (obj, camera, hoverVal) => {
+export const hoverChanged = (obj, area, hoverVal) => {
     return dispatch => {
-      dispatch({
-        type: constants.HOVER_CHANGED,
-        payload: {
-            id: 1,
-            name: "object1",
-            picture: "./notfound.png",
-            cameras: [{
-                id: 1,
-                name: "camera 1",
-                screenshot: "/media/restapi/1.png",
-                position_coords: "qweqweqwe",
-                isHovered: hoverVal,
-            },
-            {
-                id: 2,
-                name: "camera 2",
-                screenshot: "/media/restapi/1.png",
-                position_coords: "qweqweqwe",
-                isHovered: hoverVal,
-            },
-            {
-                id: 3,
-                name: "camera 3",
-                screenshot: "/media/restapi/1.png",
-                position_coords: "qweqweqwe",
-                isHovered: hoverVal,
-            },
-          ]
+        let st = {...obj}
+        console.error("!!!===== ", area);
+        st.hoveredArea = area;
+        if (area) {
+            st.hoveredImage = area.screenshot;
         }
+        // for (let i = 0; i < st.cameras.length; i++ ) {
+        //     if (st.cameras[i].id == camera.camid) {
+        //         st.cameras[i].isHovered = hoverVal;
+        //     }
+        // }
+      dispatch({
+          type: constants.HOVER_CHANGED,
+          payload: st,
       });
+      /**
+      cameras: [{
+          id: 1,
+          name: "camera 1",
+          screenshot: "/media/restapi/1.png",
+          position_coords: "qweqweqwe",
+          isHovered: hoverVal,
+      },
+      {
+          id: 2,
+          name: "camera 2",
+          screenshot: "/media/restapi/1.png",
+          position_coords: "qweqweqwe",
+          isHovered: hoverVal,
+      },
+      {
+          id: 3,
+          name: "camera 3",
+          screenshot: "/media/restapi/1.png",
+          position_coords: "qweqweqwe",
+          isHovered: hoverVal,
+      },
+    ]
+      */
     }
 };
 

@@ -23,14 +23,14 @@ class ObjectActions extends React.Component {
           <div className="btn-list">
             <div className="title">Действия</div>
             <div className="list">
-                <div><Link router={this.props.router}
-                             routeName={ROUTES.OBJECT_ADD}>
-                             добавить</Link></div>
-                <div><Link router={this.props.router}
-                              routeName={ROUTES.OBJECT_EDIT}
-                              routeParams={{id}}>
-                              редактировать</Link></div>
-                <div><a onClick={e => this.handleDelete(e)}>удалить</a></div>
+                <div>
+                    <Link router={this.props.router} routeName={ROUTES.OBJECT_ADD}>Добавить</Link>
+                </div>
+                <div>
+                    <Link router={this.props.router} routeName={ROUTES.OBJECT_EDIT} routeParams={{id}}>Редактировать</Link></div>
+                <div>
+                    <a href="#" onClick={e => this.handleDelete(e)}>Удалить</a>
+                </div>
             </div>
         </div>);
     }

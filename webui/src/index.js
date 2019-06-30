@@ -1,22 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import axios from 'axios';
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router5'
 
 import App from './App';
 import configureStore from './store';
 import {configureRouter} from './router';
+import CONFIG from './config';
 
 const router = configureRouter();
 const store = configureStore(router);
 
 //router.setDependency('store', store);
 
+axios.defaults.baseURL = CONFIG.BASE_URL;
+
 const wrappedApp = (
     <Provider store={store}>
         <RouterProvider router={router}>
-            
+
             <App/>
         </RouterProvider>
     </Provider>

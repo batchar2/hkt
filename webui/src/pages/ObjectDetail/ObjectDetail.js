@@ -4,6 +4,8 @@ import { actions as routerActions, createRouteNodeSelector } from 'redux-router5
 import ImageMapper from 'react-image-mapper';
 import { Link } from 'react-router5';
 
+
+import axios from 'axios';
 import ImageUploader from 'react-images-upload';
 
 import { ROUTES } from '../../constants/router.consts';
@@ -12,19 +14,21 @@ import NotFoundPicture from './notfound.png';
 import CameraList from '../../components/CameraList'
 import ObjectActions from '../../components/ObjectActions'
 
+import './style.css';
+
 class ObjectDetail extends React.Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {
-            cameras: [],
-            name: undefined,
-            mapPicture: undefined,
-            mapData: undefined,
-            mapid: undefined,
-            hoveredArea: null,
-        };
+        // this.state = {
+        //     cameras: [],
+        //     name: undefined,
+        //     mapPicture: undefined,
+        //     mapData: undefined,
+        //     mapid: undefined,
+        //     hoveredArea: null,
+        // };
     }
 
     componentDidMount() {
@@ -32,16 +36,17 @@ class ObjectDetail extends React.Component {
     }
 
     enterArea(area) {
-        console.error('area', area);
-        this.props.hoverChanged(this.props.objectDetail, area, true);
+        console.error('area>>>>', area);
+        this.props.hoverChanged(this.props.object, area, true);
     }
 
     leaveArea(area) {
-        this.props.hoverChanged(this.props.objectDetail, area, false);
+        this.props.hoverChanged(this.props.object, null, false);
     }
 
     getTipPosition(area) {
-        /*return { top: `${area.center[1]}px`, left: `${area.center[0]}px` };*/
+        console.error('getTipPosition>', area);
+        return { top: `${area.center[1]}px`, left: `${area.center[0]}px` };
     }
 
     mapClicked(area) {
@@ -51,72 +56,76 @@ class ObjectDetail extends React.Component {
     render() {
         let img = NotFoundPicture;
         let id = 0;
-        if (this.props.object) {
+        if (this.props.object.id) {
             id = this.props.object.id;
-            //img = this.props.object.picture;
+            img =   `${axios.defaults.baseURL}${this.props.object.picture}`;
             console.error('obj_detail', img);
         }
         let mapData = {
             name: "my-map",
-            areas: [
-              {
-                  camid: 1,
-                  name: "camera 1",
-                  //picture: img,
-                  coords: [50, 50, 15],
-                  shape: "circle",
-                  preFillColor: "blue",
-                  fillColor: "red"
-              },
-              {
-                  camid: 2,
-                  name: "camera 2",
-                  //picture: img,
-                  coords: [150, 150, 15],
-                  shape: "circle",
-                  preFillColor: "blue",
-                  fillColor: "red"
-              },
-              {
-                  camid: 3,
-                  name: "camera 3",
-                  //picture: img,
-                  coords: [250, 250, 15],
-                  shape: "circle",
-                  preFillColor: "blue",
-                  fillColor: "red"
-              },
-            ],
+            areas: []//this.props.object.
         };
+        if (this.props.object &&  this.props.object.cameras) {
+            console.error("RENDER 2>", this.props.object);
+            for (let i = 0; i < this.props.object.cameras.length; i++) {
+                let coords = JSON.parse(this.props.object.cameras[i].position_coords);
+                let camid = this.props.object.cameras[i].id;
+                let screenshot = this.props.object.cameras[i].screenshot;
+                mapData.areas.push({
+                    camid: camid,
+                    name: `camera_${camid}`,
+                    coords: coords,
+                    shape: 'circle',
+                    preFillColor: 'red',
+                    fillColor: 'red',
+                    screenshot: `${axios.defaults.baseURL}${screenshot}`,
+                });
+            }
+        }
+        if (!this.props.object.id) {
+            return (<div></div>);
+        }
         return (
           <div id="content">
               <div className="content-wrapper">
+                  <div class="breadcrumb">
+                      <div><a href="#">Оъекты</a></div>
+                      <div class="active"><a href="#">{this.props.object.name}</a></div>
+                  </div>
                   <div className="title-wrapper">
                       <h2>{this.props.object.name}</h2>
                       <ObjectActions id={this.props.params.id}/>
                   </div>
-                  <ImageMapper
-                  src={img}
-                  map={mapData}
-                  onMouseEnter={area => this.enterArea(area)}
-                  onMouseLeave={area => this.leaveArea(area)}
-                  onClick={area => this.mapClicked(area)}
-                  width={720}
-                  />
-                  {
-                      this.props.object &&
-                      <span className="tooltip" style={{ ...this.getTipPosition(this.props.object)}}>
-                          <div className="tooltip-header">
-                              { this.props.object && this.props.object.name }
-                          </div>
-                          <div>
-                              <img src={img} width="128"/>
-                          </div>
-                      </span>
-                  }
-           </div>
-           <CameraList cameras={this.props.object.cameras}/>
-        </div>
+
+                  <div className="row">
+                      <div className="col">
+                          <div className="container">
+
+                              <ImageMapper
+                                  src={img}
+                                  map={mapData}
+                                  onMouseEnter={area => this.enterArea(area)}
+                                  onMouseLeave={area => this.leaveArea(area)}
+                                  onClick={area => this.mapClicked(area)}
+                                  width={720}
+                                  />
+                                  {
+                                     this.props.object.hoveredArea &&
+                                      <span className="tooltip" style={{ ...this.getTipPosition(this.props.object.hoveredArea)}}>
+                                          <div className="tooltip-header">
+                                              { this.props.object.hoveredArea && this.props.object.hoveredArea.name }
+                                          </div>
+                                          <div>
+                                              <img src={this.props.object.hoveredImage} width="128"/>
+                                          </div>
+                                      </span>
+                                  }
+                              </div>
+                        </div>
+                    </div>
+              </div>
+              <CameraList cameras={this.props.object.cameras}/>
+          </div>
         );
     }
 }
